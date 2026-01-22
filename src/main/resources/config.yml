@@ -1,4 +1,4 @@
 # config.yml
 redis:
   host: localhost
-  password: 6379
+  port: 6379
