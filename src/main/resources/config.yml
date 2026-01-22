@@ -1,0 +1,4 @@
+# config.yml
+redis:
+  host: localhost
+  password: 6379
