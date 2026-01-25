@@ -2,3 +2,7 @@
 redis:
   host: localhost
   port: 6379
+forbidden-words:
+  - "badword1"
+  - "badword2"
+  - "badlink"
