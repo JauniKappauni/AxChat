@@ -2,3 +2,5 @@ name: AxChat
 version: '1.0-SNAPSHOT'
 main: de.jauni.axchat.AxChat
 api-version: '1.21'
+commands:
+  reload:
