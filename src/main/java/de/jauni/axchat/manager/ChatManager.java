@@ -2,6 +2,7 @@ package de.jauni.axchat.manager;
 
 import de.jauni.axchat.AxChat;
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPubSub;
 
@@ -37,6 +38,29 @@ public class ChatManager {
                 }
             }
         }).start();
+    }
 
+    public void subscribePrivateMessages() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try (Jedis subscriber = new Jedis(host, port)) {
+                    subscriber.subscribe(new JedisPubSub() {
+                        @Override
+                        public void onMessage(String ch, String message) {
+                            String[] messageParts = message.split(";");
+                            String sourcePlayer = messageParts[0];
+                            String targetName = messageParts[1];
+                            String msg = messageParts[2];
+                            Player targetPlayer = Bukkit.getPlayerExact(targetName);
+                            if (targetPlayer != null) {
+                                // Actual message
+                                targetPlayer.sendMessage(sourcePlayer + " " + "-" + " " + targetPlayer.getName() + " " + ":" + " " + msg);
+                            }
+                        }
+                    }, "private_messages");
+                }
+            }
+        }).start();
     }
 }
