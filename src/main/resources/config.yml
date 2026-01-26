@@ -7,4 +7,6 @@ forbidden-words:
   - "badword2"
   - "badlink"
 join_message_enabled: false
+join_message: "hat den Server betreten!"
 quit_message_enabled: false
+quit_message: "hat den Server verlassen!"
