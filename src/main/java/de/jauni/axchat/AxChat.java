@@ -29,6 +29,8 @@ public final class AxChat extends JavaPlugin {
         port = getConfig().getInt("redis.port");
         chatManager = new ChatManager(host, port);
         getServer().getPluginManager().registerEvents(new de.jauni.axchat.listener.ChatListener(this), this);
+        getServer().getPluginManager().registerEvents(new de.jauni.axchat.listener.PlayerJoinListener(this), this);
+        getServer().getPluginManager().registerEvents(new de.jauni.axchat.listener.PlayerQuitListener(this), this);
         getCommand("reload").setExecutor(new ReloadCommand(this));
         getCommand("msg").setExecutor(new MessageCommand(this));
         chatManager.subscribe("global_chat");
