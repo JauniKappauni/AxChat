@@ -1,6 +1,7 @@
 package de.jauni.axchat.manager;
 
 import de.jauni.axchat.AxChat;
+import me.clip.placeholderapi.PlaceholderAPI;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import redis.clients.jedis.Jedis;
@@ -31,7 +32,8 @@ public class ChatManager {
                         @Override
                         public void onMessage(String ch, String message) {
                             for (var p : Bukkit.getOnlinePlayers()) {
-                                p.sendMessage(message);
+                                String parsed = PlaceholderAPI.setPlaceholders(p, message);
+                                p.sendMessage(parsed);
                             }
                         }
                     }, channel);
