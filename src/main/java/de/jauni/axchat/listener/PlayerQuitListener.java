@@ -24,5 +24,6 @@ public class PlayerQuitListener implements Listener {
             Player p = e.getPlayer();
             Bukkit.broadcastMessage(p.getName() + " " + quitMessage);
         }
+        reference.getChatManager().getLastMessageTime().remove(e.getPlayer().getUniqueId());
     }
 }
